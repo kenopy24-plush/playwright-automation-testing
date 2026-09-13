@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { loginPage } from '../pages/loginpage';
 import { homepage} from '../pages/homepage';
-import { user } from '../data/user';
+import { purchaseFlowData } from '../data/purchaseflow';
 
 
 
@@ -22,20 +22,12 @@ test('PurchaseFlow(CashOnDelivery)', async ({ page }) => {
     const LoginPage = new loginPage(page);
     const HomePage = new homepage(page);
 
-    // const user = {
-    //     email: `user888888@test.com`,
-    //     password: 'Poplo11233##',
-    //     product_buy: '[data-test="product-01KTDMVBQV9SX12PTT5S8JB0W8"]'
-    // };
-
-
-
     // const login_button = page.locator('[data-test="login-submit"]');
 
-    await page.goto("https://practicesoftwaretesting.com/auth/login");
-    await LoginPage.emailANDpassword(user.email, user.password);
+    await page.goto(purchaseFlowData.loginUrl);
+    await LoginPage.emailANDpassword(purchaseFlowData.user.email, purchaseFlowData.user.password);
     await LoginPage.loginbuttonClick();
-    await expect(page).toHaveTitle('Overview - Practice Software Testing - Toolshop - v5.0');
+    await expect(page).toHaveTitle(purchaseFlowData.overviewTitle);
 
     await page.locator('[data-test="nav-home"]').click();
 
@@ -45,7 +37,7 @@ test('PurchaseFlow(CashOnDelivery)', async ({ page }) => {
     console.log(product_name);
 
 
-    await page.locator(user.product_buy).click();
+    await page.locator(purchaseFlowData.products.standard).click();
 
     await page.waitForLoadState();
 
@@ -72,16 +64,16 @@ test('PurchaseFlow(CashOnDelivery)', async ({ page }) => {
     const country = await page.locator('[data-test="country"]');
 
     // country.click();
-    country.selectOption("MY");
+    country.selectOption(purchaseFlowData.billing.country);
 
-    await page.locator('[data-test="house_number"]').fill("67");
+    await page.locator('[data-test="house_number"]').fill(purchaseFlowData.billing.standardHouseNumber);
     await page.locator('[data-test="proceed-3"]').click();
 
 
     //payment
     const payment_method = await page.locator('[data-test="payment-method"]');
     // payment_method.click();
-    payment_method.selectOption("cash-on-delivery");
+    payment_method.selectOption(purchaseFlowData.payments.cashOnDelivery.method);
     await page.locator('[data-test="finish"]').click();
     await expect(page.locator('[data-test="payment-success-message"]')).toBeVisible();
 
@@ -105,19 +97,12 @@ test('PurchaseFlow(BankTransfer)', async ({ page }) => {
     const LoginPage = new loginPage(page);
     const HomePage = new homepage(page);
 
-    // const user = {
-    //     email: `user888888@test.com`,
-    //     password: 'Poplo11233##',
-    //     product_buy: '[data-test="product-01KTDMVBQV9SX12PTT5S8JB0W8"]'
-    // };
-
-
     // const login_button = page.locator('[data-test="login-submit"]');
 
-    await page.goto("https://practicesoftwaretesting.com/auth/login");
-    await LoginPage.emailANDpassword(user.email, user.password);
+    await page.goto(purchaseFlowData.loginUrl);
+    await LoginPage.emailANDpassword(purchaseFlowData.user.email, purchaseFlowData.user.password);
     await LoginPage.loginbuttonClick();
-    await expect(page).toHaveTitle('Overview - Practice Software Testing - Toolshop - v5.0');
+    await expect(page).toHaveTitle(purchaseFlowData.overviewTitle);
 
     await page.locator('[data-test="nav-home"]').click();
 
@@ -129,7 +114,7 @@ test('PurchaseFlow(BankTransfer)', async ({ page }) => {
     console.log(product_name);
 
 
-    await page.locator(user.product_buy).click();
+    await page.locator(purchaseFlowData.products.standard).click();
 
     await page.waitForLoadState();
     await HomePage.addtocart_button.click();
@@ -157,20 +142,20 @@ test('PurchaseFlow(BankTransfer)', async ({ page }) => {
     const country = await page.locator('[data-test="country"]');
 
     // country.click();
-    country.selectOption("MY");
+    country.selectOption(purchaseFlowData.billing.country);
 
-    await page.locator('[data-test="house_number"]').fill("67");
+    await page.locator('[data-test="house_number"]').fill(purchaseFlowData.billing.standardHouseNumber);
     await page.locator('[data-test="proceed-3"]').click();
 
 
     //payment
     const payment_method = await page.locator('[data-test="payment-method"]');
     // payment_method.click();
-    payment_method.selectOption("bank-transfer");
+    payment_method.selectOption(purchaseFlowData.payments.bankTransfer.method);
 
-    await page.locator('[data-test="bank_name"]').fill("aaaaaa");
-    await page.locator('[data-test="account_name"]').fill("12333234aaaaaaaa");
-    await page.locator('[data-test="account_number"]').fill("1232333");
+    await page.locator('[data-test="bank_name"]').fill(purchaseFlowData.payments.bankTransfer.bankName);
+    await page.locator('[data-test="account_name"]').fill(purchaseFlowData.payments.bankTransfer.accountName);
+    await page.locator('[data-test="account_number"]').fill(purchaseFlowData.payments.bankTransfer.accountNumber);
 
     await page.locator('[data-test="finish"]').click();
     await expect(page.locator('[data-test="payment-success-message"]')).toBeVisible();
@@ -184,19 +169,12 @@ test('PurchaseFlow(CreditCard)', async ({ page }) => {
 
     const LoginPage = new loginPage(page);
 
-    // const user = {
-    //     email: `user888888@test.com`,
-    //     password: 'Poplo11233##',
-    //     product_buy: '[data-test="product-01KTDR95WSC9WJ1RVFTRCKAM5T"]'
-    // };
-
-
     // const login_button = page.locator('[data-test="login-submit"]');
 
-    await page.goto("https://practicesoftwaretesting.com/auth/login");
-    await LoginPage.emailANDpassword(user.email, user.password);
+    await page.goto(purchaseFlowData.loginUrl);
+    await LoginPage.emailANDpassword(purchaseFlowData.user.email, purchaseFlowData.user.password);
     await LoginPage.loginbuttonClick();
-    await expect(page).toHaveTitle('Overview - Practice Software Testing - Toolshop - v5.0');
+    await expect(page).toHaveTitle(purchaseFlowData.overviewTitle);
 
     await page.locator('[data-test="nav-home"]').click();
 
@@ -206,7 +184,7 @@ test('PurchaseFlow(CreditCard)', async ({ page }) => {
     console.log(product_name);
 
 
-    await page.locator(user.product_buy).click();
+    await page.locator(purchaseFlowData.products.standard).click();
 
     await page.waitForLoadState();
 
@@ -233,21 +211,21 @@ test('PurchaseFlow(CreditCard)', async ({ page }) => {
     const country = await page.locator('[data-test="country"]');
 
     // country.click();
-    country.selectOption("MY");
+    country.selectOption(purchaseFlowData.billing.country);
 
-    await page.locator('[data-test="house_number"]').fill("67");
+    await page.locator('[data-test="house_number"]').fill(purchaseFlowData.billing.standardHouseNumber);
     await page.locator('[data-test="proceed-3"]').click();
 
 
     //payment
     const payment_method = await page.locator('[data-test="payment-method"]');
     // payment_method.click();
-    payment_method.selectOption("credit-card");
+    payment_method.selectOption(purchaseFlowData.payments.creditCard.method);
 
-    await page.locator('[data-test="credit_card_number"]').fill("1111-1111-1111-1111");
-    await page.locator('[data-test="expiration_date"]').fill("11/2099");
-    await page.locator('[data-test="cvv"]').fill("111");
-    await page.locator('[data-test="card_holder_name"]').fill("aaaaaaaaaaaaaa");
+    await page.locator('[data-test="credit_card_number"]').fill(purchaseFlowData.payments.creditCard.cardNumber);
+    await page.locator('[data-test="expiration_date"]').fill(purchaseFlowData.payments.creditCard.expirationDate);
+    await page.locator('[data-test="cvv"]').fill(purchaseFlowData.payments.creditCard.cvv);
+    await page.locator('[data-test="card_holder_name"]').fill(purchaseFlowData.payments.creditCard.cardHolderName);
 
     await page.locator('[data-test="finish"]').click();
     await expect(page.locator('[data-test="payment-success-message"]')).toBeVisible();
@@ -261,19 +239,12 @@ test('PurchaseFlow(BuyNowPayLater)', async ({ page }) => {
 
     const LoginPage = new loginPage(page);
 
-    // const user = {
-    //     email: `user888888@test.com`,
-    //     password: 'Poplo11233##',
-    //     product_buy: '[data-test="product-01KTDR95WSC9WJ1RVFTRCKAM5T"]'
-    // };
-
-
     // const login_button = page.locator('[data-test="login-submit"]');
 
-    await page.goto("https://practicesoftwaretesting.com/auth/login");
-    await LoginPage.emailANDpassword(user.email, user.password);
+    await page.goto(purchaseFlowData.loginUrl);
+    await LoginPage.emailANDpassword(purchaseFlowData.user.email, purchaseFlowData.user.password);
     await LoginPage.loginbuttonClick();
-    await expect(page).toHaveTitle('Overview - Practice Software Testing - Toolshop - v5.0');
+    await expect(page).toHaveTitle(purchaseFlowData.overviewTitle);
 
     await page.locator('[data-test="nav-home"]').click();
 
@@ -283,7 +254,7 @@ test('PurchaseFlow(BuyNowPayLater)', async ({ page }) => {
     console.log(product_name);
 
 
-    await page.locator(user.product_buy).click();
+    await page.locator(purchaseFlowData.products.standard).click();
 
     await page.waitForLoadState();
 
@@ -310,23 +281,23 @@ test('PurchaseFlow(BuyNowPayLater)', async ({ page }) => {
     const country = page.locator('[data-test="country"]');
 
     // country.click();
-    await country.selectOption("MY");
+    await country.selectOption(purchaseFlowData.billing.country);
     await page.waitForLoadState('networkidle');
 
     const houseNumber = page.locator('[data-test="house_number"]');
 
     await houseNumber.waitFor({ state: 'visible' });
-    await houseNumber.fill("11");
+    await houseNumber.fill(purchaseFlowData.billing.buyNowPayLaterHouseNumber);
     await page.locator('[data-test="proceed-3"]').click();
 
 
     //payment
     const payment_method = await page.locator('[data-test="payment-method"]');
     // payment_method.click();
-    payment_method.selectOption("buy-now-pay-later");
+    payment_method.selectOption(purchaseFlowData.payments.buyNowPayLater.method);
 
     const duration = await page.locator('[data-test="monthly_installments"]');
-    duration.selectOption("3");
+    duration.selectOption(purchaseFlowData.payments.buyNowPayLater.installments);
 
     await page.locator('[data-test="finish"]').click();
     await expect(page.locator('[data-test="payment-success-message"]')).toBeVisible();
@@ -340,19 +311,12 @@ test.only('PurchaseFlow(GiftCode)', async ({ page }) => {
 
     const LoginPage = new loginPage(page);
 
-    const user = {
-        email: `user888888@test.com`,
-        password: 'Poplo11233##',
-        product_buy: '[data-test="product-01KTDR95WSC9WJ1RVFTRCKAM5T"]'
-    };
-
-
     // const login_button = page.locator('[data-test="login-submit"]');
 
-    await page.goto("https://practicesoftwaretesting.com/auth/login");
-    await LoginPage.emailANDpassword(user.email, user.password);
+    await page.goto(purchaseFlowData.loginUrl);
+    await LoginPage.emailANDpassword(purchaseFlowData.user.email, purchaseFlowData.user.password);
     await LoginPage.loginbuttonClick();
-    await expect(page).toHaveTitle('Overview - Practice Software Testing - Toolshop - v5.0');
+    await expect(page).toHaveTitle(purchaseFlowData.overviewTitle);
 
     await page.locator('[data-test="nav-home"]').click();
 
@@ -362,7 +326,7 @@ test.only('PurchaseFlow(GiftCode)', async ({ page }) => {
     console.log(product_name);
 
 
-    await page.locator(user.product_buy).click();
+    await page.locator(purchaseFlowData.products.giftCard).click();
 
     await page.waitForLoadState();
 
@@ -389,23 +353,23 @@ test.only('PurchaseFlow(GiftCode)', async ({ page }) => {
     const country = page.locator('[data-test="country"]');
 
     // country.click();
-    await country.selectOption("MY");
+    await country.selectOption(purchaseFlowData.billing.country);
     await page.waitForLoadState('networkidle');
 
     const houseNumber = page.locator('[data-test="house_number"]');
 
     await houseNumber.waitFor({ state: 'visible' });
-    await houseNumber.fill("11");
+    await houseNumber.fill(purchaseFlowData.billing.buyNowPayLaterHouseNumber);
     await page.locator('[data-test="proceed-3"]').click();
 
 
     //payment
     const payment_method = await page.locator('[data-test="payment-method"]');
     // payment_method.click();
-    payment_method.selectOption("gift-card");
+    payment_method.selectOption(purchaseFlowData.payments.giftCard.method);
 
-    await page.locator('[data-test="gift_card_number"]').fill("adad2313131");
-    await page.locator('[data-test="validation_code""]').fill("adad231313122222");
+    await page.locator('[data-test="gift_card_number"]').fill(purchaseFlowData.payments.giftCard.cardNumber);
+    await page.locator('[data-test="validation_code"]').fill(purchaseFlowData.payments.giftCard.validationCode);
 
     await page.locator('[data-test="finish"]').click();
     await expect(page.locator('[data-test="payment-success-message"]')).toBeVisible();
@@ -413,7 +377,3 @@ test.only('PurchaseFlow(GiftCode)', async ({ page }) => {
 
 
 });
-
-
-
-
