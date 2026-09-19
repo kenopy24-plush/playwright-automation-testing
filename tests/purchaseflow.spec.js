@@ -45,6 +45,7 @@ test('PurchaseFlow(CashOnDelivery)', async ({ page }) => {
 
     await HomePage.cart_button.click();
 
+    //to get Item info for matching to ensure is correct
     const product_name_cart = await page.locator('[data-test="product-title"]').nth(0).textContent();
     console.log(product_name_cart);
 
