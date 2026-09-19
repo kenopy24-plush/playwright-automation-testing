@@ -307,7 +307,7 @@ test('PurchaseFlow(BuyNowPayLater)', async ({ page }) => {
 
 });
 
-test.only('PurchaseFlow(GiftCode)', async ({ page }) => {
+test('PurchaseFlow(GiftCode)', async ({ page }) => {
 
 
     const LoginPage = new loginPage(page);
