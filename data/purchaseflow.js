@@ -11,7 +11,8 @@ export const purchaseFlowData = {
     },
     products: {
         standard: user.product_buy,
-        giftCard: '[data-test="product-01KTDR95WSC9WJ1RVFTRCKAM5T"]'
+        //ALWAYS change the product ID for now
+        giftCard: '[data-test="product-01M2WEA6C3P9TGJW953FER69KY"]'
     },
     payments: {
         cashOnDelivery: {
