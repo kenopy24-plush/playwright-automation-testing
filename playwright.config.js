@@ -1,4 +1,5 @@
 // @ts-check
+// @ts-ignore Playwright is provided by the project's test dependencies.
 import { defineConfig, devices } from '@playwright/test';
 
 /**
