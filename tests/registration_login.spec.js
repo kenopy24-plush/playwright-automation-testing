@@ -1,6 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { generateDOB, generatePhoneNumber } from '../utils/dataGen';
+import { user } from '../data/user';
 import { registrationPage } from '../pages/registrationpage';
 import { loginPage } from '../pages/loginpage';
 
@@ -8,22 +8,6 @@ test('registration', async ({ page }) => {
 
     
     const register = new registrationPage(page);
-
-    //user config
-    const user = {
-        first: 'John',
-        last: 'Doe',
-        dob: generateDOB(),
-        street: '123 Test Street',
-        postal: '47800',
-        house_number: '67',
-        city: 'Petaling Jaya',
-        state: 'Selangor',
-        country: 'MY',
-        phone: generatePhoneNumber(),
-        email: `user888888@test.com`,
-        password: 'Poplo11233##'
-    };
 
     await page.goto('https://practicesoftwaretesting.com/');
 
@@ -56,12 +40,6 @@ test('registration', async ({ page }) => {
 test('login', async ({ page }) => {
 
     const LoginPage = new loginPage(page);
-
-    const user = {
-        email: `user888888@test.com`,
-        password: 'Poplo11233##'
-    };
-
 
     await page.goto("https://practicesoftwaretesting.com/auth/login");
     await LoginPage.emailANDpassword(user.email, user.password);

@@ -1,4 +1,16 @@
+import { generateDOB, generatePhoneNumber } from '../utils/dataGen';
+
 export const user = {
+    first: 'John',
+    last: 'Doe',
+    dob: generateDOB(),
+    street: '123 Test Street',
+    postal: '47800',
+    house_number: '67',
+    city: 'Petaling Jaya',
+    state: 'Selangor',
+    country: 'MY',
+    phone: generatePhoneNumber(),
     email: `user888888@test.com`,
     password: 'Poplo11233##',
     //ALWAYS change the product ID for now
