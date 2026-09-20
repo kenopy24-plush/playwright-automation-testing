@@ -11,8 +11,8 @@ export const user = {
     state: 'Selangor',
     country: 'MY',
     phone: generatePhoneNumber(),
-    email: `user888888@test.com`,
-    password: 'Poplo11233##',
+    email: `user8888888@test.com`,
+    password: 'Poplo112333##',
     //ALWAYS change the product ID for now
     product_buy: '[data-test="product-01M2WEA6C3P9TGJW953FER69KY"]'
 };
