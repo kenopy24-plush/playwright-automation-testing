@@ -14,5 +14,5 @@ export const user = {
     email: `user8888888@test.com`,
     password: 'Poplo112333##',
     //ALWAYS change the product ID for now
-    product_buy: '[data-test="product-01M2WEA6C3P9TGJW953FER69KY"]'
+    product_buy: '[data-test="product-01M3E87JECG324Q8XH3AD88H08"]'
 };

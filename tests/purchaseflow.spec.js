@@ -77,8 +77,10 @@ test('PurchaseFlow(CashOnDelivery)', async ({ page }) => {
     payment_method.selectOption(purchaseFlowData.payments.cashOnDelivery.method);
     await page.locator('[data-test="finish"]').click();
     await expect(page.locator('[data-test="payment-success-message"]')).toBeVisible();
+    await page.locator('[data-test="finish"]').click();
 
-
+    const invoiceText = await page.locator("#order-confirmation span").innerText();
+    console.log(invoiceText);
 
 
     // await page.pause();
@@ -327,7 +329,7 @@ test('PurchaseFlow(GiftCode)', async ({ page }) => {
     console.log(product_name);
 
 
-    await page.locator(purchaseFlowData.products.giftCard).click();
+    await page.locator(purchaseFlowData.products.standard).click();
 
     await page.waitForLoadState();
 
